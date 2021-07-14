@@ -9,13 +9,18 @@ import NavBar from './components/NavBar';
 import FourOFour from './pages/FourOFour';
 import Home from './pages/Home';
 import AllSongs from './pages/AllSongs';
+import ShowSong from './pages/ShowSong';
 
 const API = apiURL();
 
 function App() {
   const [ songs, setSongs ] = useState([]);
-  let { id } = useParams();
+  //let { id } = useParams();
+  // const addSong = () => {};
 
+  // const updateSong = () => {};
+
+  // const deleteSong = () => {};
 
   useEffect(() => {
     axios
@@ -25,7 +30,7 @@ function App() {
         error => console.log('get', error)
       )
       .catch(c => console.warn('catch', c));
-  }, [API]);
+  }, []);
 
   return (
     <div className="App">
@@ -36,6 +41,10 @@ function App() {
           <Switch>
             <Route exact path='/'>
               <Home />
+            </Route>
+
+            <Route path='/songs/:id'>
+              <ShowSong songs={songs}/>
             </Route>
 
             <Route path='/songs'>
