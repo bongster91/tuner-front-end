@@ -10,6 +10,8 @@ import FourOFour from './pages/FourOFour';
 import Home from './pages/Home';
 import AllSongs from './pages/AllSongs';
 import ShowSong from './pages/ShowSong';
+import New from './pages/New';
+import Edit from './pages/Edit';
 
 const API = apiURL();
 
@@ -41,6 +43,14 @@ function App() {
           <Switch>
             <Route exact path='/'>
               <Home />
+            </Route>
+
+            <Route path='/songs/new'>
+              <New />
+            </Route>
+
+            <Route path='/songs/:id/edit'>
+              <Edit />
             </Route>
 
             <Route path='/songs/:id'>
