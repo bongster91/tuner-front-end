@@ -32,12 +32,16 @@ function SongDetail() {
         axios
             .delete(`${API}/songs/${id}`)
             .then(
-                () => history.push(`/songs`),
-                (err) => console.log(err)
+                () => history.push('/songs'),
+                (e) => console.warn(e)
             )
             .catch(
-                c => console.warn(c)
+                (c) => console.error(c)
             );
+    };
+
+    const handleDelete = () => {
+        deleteSong();
     };
 
     return (
@@ -56,7 +60,7 @@ function SongDetail() {
             <Link to={`/songs/${id}/edit`} song={song}>
                 <button>Edit</button>
             </Link>
-            <button onClick={deleteSong}>Delete</button>
+            <button onClick={handleDelete}>Delete</button>
         </div>
     );
 };

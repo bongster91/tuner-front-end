@@ -18,11 +18,19 @@ const API = apiURL();
 function App() {
   const [ songs, setSongs ] = useState([]);
   //let { id } = useParams();
-  // const addSong = () => {};
+  const addSong = (newSong) => {
+    axios
+      .post(`${API}/songs`, newSong)
+      .then(
+        () => setSongs([...songs, newSong]),
+        (e) => console.error(e)
+      )
+      .catch(
+        (err) => console.warn(err)
+      );
+  };
 
   // const updateSong = () => {};
-
-  // const deleteSong = () => {};
 
   useEffect(() => {
     axios
@@ -46,7 +54,7 @@ function App() {
             </Route>
 
             <Route path='/songs/new'>
-              <New />
+              <New addSong={addSong} />
             </Route>
 
             <Route path='/songs/:id/edit'>
@@ -54,7 +62,7 @@ function App() {
             </Route>
 
             <Route path='/songs/:id'>
-              <ShowSong songs={songs}/>
+              <ShowSong songs={songs} />
             </Route>
 
             <Route path='/songs'>
