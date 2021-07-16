@@ -1,10 +1,10 @@
 import NewSong from '../components/NewSong';
 
-function New({ addSong }) {
+function New() {
     return (
         <div>
             <h1>New Song Form</h1>
-            <NewSong addSong={addSong} />
+            <NewSong />
         </div>
     );
 };

@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useHistory, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { apiURL } from '../util/apiURL';
 
-function NewSong({ addSong }) {
-    let history = useHistory();
+const API = apiURL();
+
+function NewSong({ history }) {
 
     const [ song, setSong ] = useState({
         name: '',
@@ -13,9 +15,21 @@ function NewSong({ addSong }) {
         time: ''
     });
 
-    const handleSubmit = (e) => {
+    const addSong = (newSong) => {
+        return axios
+          .post(`${API}/songs`, newSong)
+          .then(
+            () => setSong([...song, newSong]),
+            (e) => console.error(e)
+          )
+          .catch(
+            (err) => console.warn(err)
+          );
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        addSong(song);
+        await addSong(song);
         history.push('/songs');
     };
 

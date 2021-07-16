@@ -3,11 +3,12 @@ import { Link, useParams, useHistory, withRouter } from 'react-router-dom';
 import { apiURL } from '../util/apiURL';
 import axios from 'axios';
 
+const API = apiURL();
+
 function SongDetail() {
     const [ song, setSong ] = useState([]);
     const { id } = useParams();
     const history = useHistory();
-    const API = apiURL();
 
     useEffect(() => {
         axios

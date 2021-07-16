@@ -16,31 +16,13 @@ import Edit from './pages/Edit';
 const API = apiURL();
 
 function App() {
-  const [ songs, setSongs ] = useState([]);
+  
   //let { id } = useParams();
-  const addSong = (newSong) => {
-    axios
-      .post(`${API}/songs`, newSong)
-      .then(
-        () => setSongs([...songs, newSong]),
-        (e) => console.error(e)
-      )
-      .catch(
-        (err) => console.warn(err)
-      );
+  
+
+  const updateSong = () => {
+
   };
-
-  // const updateSong = () => {};
-
-  useEffect(() => {
-    axios
-      .get(`${API}/songs`)
-      .then(
-        response => setSongs(response.data),
-        error => console.log('get', error)
-      )
-      .catch(c => console.warn('catch', c));
-  }, []);
 
   return (
     <div className="App">
@@ -54,7 +36,7 @@ function App() {
             </Route>
 
             <Route path='/songs/new'>
-              <New addSong={addSong} />
+              <New />
             </Route>
 
             <Route path='/songs/:id/edit'>
@@ -62,11 +44,11 @@ function App() {
             </Route>
 
             <Route path='/songs/:id'>
-              <ShowSong songs={songs} />
+              <ShowSong />
             </Route>
 
             <Route path='/songs'>
-              <AllSongs songs={songs} />
+              <AllSongs />
             </Route>
 
             <Route path='*'>
