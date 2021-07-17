@@ -16,10 +16,10 @@ function NewSong({ history }) {
     });
 
     const addSong = (newSong) => {
-        return axios
+        axios
           .post(`${API}/songs`, newSong)
           .then(
-            () => setSong([...song, newSong]),
+            () => history.push('/songs'),
             (e) => console.error(e)
           )
           .catch(
@@ -27,10 +27,9 @@ function NewSong({ history }) {
           );
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        await addSong(song);
-        history.push('/songs');
+        addSong(song);
     };
 
     const handleTextChange = (e) => {

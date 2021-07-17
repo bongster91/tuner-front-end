@@ -1,8 +1,4 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-import axios from 'axios';
-import { apiURL } from './util/apiURL';
 
 import NavBar from './components/NavBar';
 
@@ -13,17 +9,7 @@ import ShowSong from './pages/ShowSong';
 import New from './pages/New';
 import Edit from './pages/Edit';
 
-const API = apiURL();
-
 function App() {
-  
-  //let { id } = useParams();
-  
-
-  const updateSong = () => {
-
-  };
-
   return (
     <div className="App">
       <Router>

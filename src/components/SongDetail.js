@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams, useHistory, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { apiURL } from '../util/apiURL';
 import axios from 'axios';
 
 const API = apiURL();
 
-function SongDetail() {
+function SongDetail({ history, match }) {
     const [ song, setSong ] = useState([]);
-    const { id } = useParams();
-    const history = useHistory();
+    const { id } = match.params;
 
     useEffect(() => {
         axios
@@ -23,14 +22,10 @@ function SongDetail() {
             .catch(
                 (c) => console.warn('catch', c)
             );
-    }, [id, history, API]);
+    }, [id, history]);
 
-    const previousPage = () => {
-        return history.goBack()
-    };
-
-    const deleteSong = () => {
-        axios
+    const deleteSong = async () => {
+        await axios
             .delete(`${API}/songs/${id}`)
             .then(
                 () => history.push('/songs'),
@@ -39,10 +34,6 @@ function SongDetail() {
             .catch(
                 (c) => console.error(c)
             );
-    };
-
-    const handleDelete = () => {
-        deleteSong();
     };
 
     return (
@@ -57,11 +48,14 @@ function SongDetail() {
                 </h4>
             </section>
 
-            <button onClick={previousPage}>Back</button>
-            <Link to={`/songs/${id}/edit`} song={song}>
+            <Link to={`/songs`}>
+                <button>Back</button>
+            </Link>
+
+            <Link to={`/songs/${id}/edit`}>
                 <button>Edit</button>
             </Link>
-            <button onClick={handleDelete}>Delete</button>
+            <button onClick={deleteSong}>Delete</button>
         </div>
     );
 };
