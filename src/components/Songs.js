@@ -27,7 +27,7 @@ function Songs() {
                         <li key={song.id}>
                             <Song song={song} />
                         </li>)
-                    })}{console.log(songs)}
+                    })}
                 </ol>
             </section>
         </div>
